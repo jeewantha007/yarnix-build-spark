@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import DarkModeToggle from "@/components/DarkModeToggle";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,8 +55,9 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* CTA Button */}
+          {/* CTA Button & Dark Mode */}
           <div className="hidden md:flex items-center space-x-4">
+            <DarkModeToggle />
             <Link to="/contact">
               <Button className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-elegant">
                 Start a Project

@@ -5,6 +5,7 @@ import Features from "@/components/home/Features";
 import FeaturedProjects from "@/components/home/FeaturedProjects";
 import TeamTeaser from "@/components/home/TeamTeaser";
 import ContactCTA from "@/components/home/ContactCTA";
+import Chatbot from "@/components/Chatbot";
 
 const Index = () => {
   return (
@@ -18,6 +19,7 @@ const Index = () => {
         <ContactCTA />
       </main>
       <Footer />
+      <Chatbot />
     </div>
   );
 };
