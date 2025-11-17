@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, ArrowRight } from "lucide-react";
-
+import jeewantha from "../../assets/jeewantha.jpg";
 const TeamTeaser = () => {
   // Mock data - will be replaced with Supabase data later
   const team = [
     {
-      name: "Alex Chen",
+      name: "Nirmal Wishwantha",
       role: "CEO & Lead Developer",
       bio: "Full-stack developer with 10+ years building scalable AI solutions",
       image: "/placeholder.svg",
@@ -15,15 +15,15 @@ const TeamTeaser = () => {
       linkedin: "https://linkedin.com",
     },
     {
-      name: "Sarah Johnson",
+      name: "Jeewantha Sandeepa",
       role: "AI/ML Engineer",
       bio: "Machine learning expert specializing in NLP and computer vision",
-      image: "/placeholder.svg",
+      image: jeewantha,
       github: "https://github.com",
       linkedin: "https://linkedin.com",
     },
     {
-      name: "Michael Park",
+      name: "Yasith Nawanjana",
       role: "DevOps & Automation Lead",
       bio: "Infrastructure architect passionate about automation and cloud systems",
       image: "/placeholder.svg",
