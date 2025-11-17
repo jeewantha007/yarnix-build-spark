@@ -1,16 +1,55 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Hero = () => {
   const videoRef = useRef(null);
+  const [projectsCount, setProjectsCount] = useState(0);
+  const [teamCount, setTeamCount] = useState(0);
+  const [satisfactionCount, setSatisfactionCount] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 0.8; // Slower, more cinematic playback
     }
   }, []);
+
+  useEffect(() => {
+    // Trigger counter animation after initial delay
+    const timer = setTimeout(() => {
+      if (!hasAnimated) {
+        animateCounter(setProjectsCount, 50, 1500);
+        animateCounter(setTeamCount, 3, 1000);
+        animateCounter(setSatisfactionCount, 100, 1500);
+        setHasAnimated(true);
+      }
+    }, 900); // Start after fade-in animation
+
+    return () => clearTimeout(timer);
+  }, [hasAnimated]);
+
+  const animateCounter = (setter, target, duration) => {
+    const startTime = Date.now();
+    const step = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Easing function for smooth deceleration
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const current = Math.floor(easeOutQuart * target);
+      
+      setter(current);
+      
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        setter(target);
+      }
+    };
+    requestAnimationFrame(step);
+  };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
@@ -106,19 +145,19 @@ const Hero = () => {
           <div className="grid grid-cols-3 gap-6 md:gap-8 max-w-xl mx-auto animate-fade-in opacity-0" style={{ animationDelay: "0.9s", animationFillMode: "forwards" }}>
             <div className="group cursor-default">
               <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-1 group-hover:scale-110 transition-transform duration-300">
-                50+
+                {projectsCount}+
               </div>
               <div className="text-xs md:text-sm text-muted-foreground">Projects Delivered</div>
             </div>
             <div className="group cursor-default">
               <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-1 group-hover:scale-110 transition-transform duration-300">
-                3
+                {teamCount}
               </div>
               <div className="text-xs md:text-sm text-muted-foreground">Expert Team</div>
             </div>
             <div className="group cursor-default">
               <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-1 group-hover:scale-110 transition-transform duration-300">
-                100%
+                {satisfactionCount}%
               </div>
               <div className="text-xs md:text-sm text-muted-foreground">Client Satisfaction</div>
             </div>
