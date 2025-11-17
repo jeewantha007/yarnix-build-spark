@@ -27,34 +27,35 @@ const About = () => {
     },
   ];
 
-  const team = [
-    {
-      name: "Nirmal Wishwantha",
-      role: "Co-Founder",
-      bio: "Versatile and passionate about building modern digital products. Experienced across full-stack development, system planning, and solving complex technical challenges.",
-      photo:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80",
-      github: "https://github.com",
-      linkedin: "https://linkedin.com",
-    },
-    {
-      name: "Jeewantha Sandeepa",
-      role: "Co-Founder",
-      bio: "Multi-skilled engineer with hands-on experience in DevOps, cloud systems, automation, and scalable application development. Focused on delivering reliable and impactful solutions.",
-      photo: jeewantha,
-      github: "https://github.com",
-      linkedin: "https://linkedin.com",
-    },
-    {
-      name: "Yasith Nawanjana",
-      role: "Co-Founder",
-      bio: "Adaptable and creative problem-solver with experience in automation, mobile development, and end-to-end product execution. Always ready to take on new challenges.",
-      photo:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80",
-      github: "https://github.com",
-      linkedin: "https://linkedin.com",
-    },
-  ];
+const team = [
+  {
+    name: "Nirmal Wishwantha",
+    role: "Co-Founder & Technical Lead",
+    bio: "Innovative full-stack developer and technology strategist, experienced in designing and delivering modern digital products. Skilled at solving complex technical challenges and leading high-performing development teams.",
+    photo:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80",
+    github: "https://github.com",
+    linkedin: "https://linkedin.com",
+  },
+  {
+    name: "Jeewantha Sandeepa",
+    role: "Co-Founder & DevOps Engineer",
+    bio: "Experienced DevOps engineer and cloud specialist, adept at building scalable, automated, and reliable systems. Passionate about streamlining development workflows and delivering impactful software solutions.",
+    photo: jeewantha,
+    github: "https://github.com",
+    linkedin: "https://linkedin.com",
+  },
+  {
+    name: "Yasith Nawanjana",
+    role: "Co-Founder & AI/ML Engineer",
+    bio: "Creative AI and machine learning engineer with expertise in automation, mobile app development, and end-to-end product delivery. Driven by innovation and committed to solving real-world challenges with intelligent solutions.",
+    photo:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80",
+    github: "https://github.com",
+    linkedin: "https://linkedin.com",
+  },
+];
+
 
   return (
     <div className="min-h-screen">
