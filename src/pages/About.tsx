@@ -3,52 +3,59 @@ import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Target, Zap, Users, Github, Linkedin } from "lucide-react";
+import jeewantha from "../assets/jeewantha.jpg";
 
 const About = () => {
   const values = [
     {
       icon: Target,
       title: "Mission-Driven",
-      description: "We're committed to building software that solves real problems and creates lasting value.",
+      description:
+        "We're committed to building software solutions that solve real problems and create lasting value for our clients.",
     },
     {
       icon: Zap,
       title: "Innovation First",
-      description: "We stay ahead of the curve, leveraging the latest AI and tech to deliver cutting-edge solutions.",
+      description:
+        "We stay ahead of the curve, leveraging the latest AI and automation technologies to deliver cutting-edge solutions.",
     },
     {
       icon: Users,
       title: "Client Success",
-      description: "Your success is our success. We partner closely to ensure every project exceeds expectations.",
+      description:
+        "Your success is our success. We partner closely to ensure every project exceeds expectations.",
     },
   ];
 
-  const team = [
-    {
-      name: "Alex Thompson",
-      role: "Founder & Lead Engineer",
-      bio: "10+ years building scalable systems. Passionate about AI and automation. Former tech lead at major SaaS companies.",
-      photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
-      github: "https://github.com",
-      linkedin: "https://linkedin.com",
-    },
-    {
-      name: "Sarah Chen",
-      role: "AI/ML Specialist",
-      bio: "PhD in Machine Learning. Expert in NLP and computer vision. Published researcher with 15+ papers in top conferences.",
-      photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80",
-      github: "https://github.com",
-      linkedin: "https://linkedin.com",
-    },
-    {
-      name: "Marcus Rodriguez",
-      role: "Full-Stack Developer",
-      bio: "5 years crafting beautiful, performant web and mobile apps. Loves React, TypeScript, and pixel-perfect UIs.",
-      photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80",
-      github: "https://github.com",
-      linkedin: "https://linkedin.com",
-    },
-  ];
+const team = [
+  {
+    name: "Nirmal Wishwantha",
+    role: "Co-Founder & Technical Lead",
+    bio: "Innovative full-stack developer and technology strategist, experienced in designing and delivering modern digital products. Skilled at solving complex technical challenges and leading high-performing development teams.",
+    photo:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80",
+    github: "https://github.com",
+    linkedin: "https://linkedin.com",
+  },
+  {
+    name: "Jeewantha Sandeepa",
+    role: "Co-Founder & DevOps Engineer",
+    bio: "Experienced DevOps engineer and cloud specialist, adept at building scalable, automated, and reliable systems. Passionate about streamlining development workflows and delivering impactful software solutions.",
+    photo: jeewantha,
+    github: "https://github.com",
+    linkedin: "https://linkedin.com",
+  },
+  {
+    name: "Yasith Nawanjana",
+    role: "Co-Founder & AI/ML Engineer",
+    bio: "Creative AI and machine learning engineer with expertise in automation, mobile app development, and end-to-end product delivery. Driven by innovation and committed to solving real-world challenges with intelligent solutions.",
+    photo:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80",
+    github: "https://github.com",
+    linkedin: "https://linkedin.com",
+  },
+];
+
 
   return (
     <div className="min-h-screen">
@@ -59,10 +66,14 @@ const About = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-5xl md:text-6xl font-bold mb-6">
-                About <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Yarnix Labs</span>
+                About{" "}
+                <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                  Yarnix Labs
+                </span>
               </h1>
               <p className="text-xl text-muted-foreground">
-                A small but mighty team of engineers building intelligent software that scales.
+                A small but mighty team of engineers building intelligent
+                software that scales.
               </p>
             </div>
           </div>
@@ -75,13 +86,24 @@ const About = () => {
               <h2 className="text-4xl font-bold mb-6">Our Story</h2>
               <div className="prose prose-lg max-w-none text-muted-foreground space-y-4">
                 <p>
-                  Yarnix Labs was founded in 2021 with a simple mission: build software that makes businesses smarter and more efficient. What started as a small consultancy has grown into a trusted partner for companies looking to harness the power of AI and automation.
+                  Yarnix was founded in 2025 by three passionate technologists
+                  who saw an opportunity to help businesses transform through
+                  intelligent software solutions. What started as a vision has
+                  quickly grown into a dynamic company delivering cutting-edge
+                  solutions across multiple domains.
                 </p>
                 <p>
-                  We've delivered 50+ projects across industries—from e-commerce to healthcare—helping our clients save time, reduce costs, and unlock new opportunities. Our team combines deep technical expertise with a genuine passion for problem-solving.
+                  We specialize in AI tools, automation solutions, full-stack
+                  development, UI/UX design, mobile applications, and web
+                  platforms. Our comprehensive approach means we can handle
+                  projects from concept to deployment, ensuring seamless
+                  integration and exceptional results.
                 </p>
                 <p>
-                  Today, we're at the forefront of the AI revolution, building custom tools and platforms that turn data into decisions and automate the mundane so our clients can focus on what matters most.
+                  Whether you need a custom AI tool to unlock insights from your
+                  data, an automation system to streamline operations, a
+                  beautiful mobile app, or a scalable web application, we have
+                  the expertise to bring your vision to life.
                 </p>
               </div>
             </div>
@@ -141,8 +163,12 @@ const About = () => {
                   </div>
                   <div className="p-6">
                     <h3 className="text-xl font-bold mb-1">{member.name}</h3>
-                    <p className="text-primary font-medium mb-3">{member.role}</p>
-                    <p className="text-sm text-muted-foreground mb-4">{member.bio}</p>
+                    <p className="text-primary font-medium mb-3">
+                      {member.role}
+                    </p>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      {member.bio}
+                    </p>
                     <div className="flex gap-3">
                       <a
                         href={member.github}
@@ -174,7 +200,8 @@ const About = () => {
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-4xl font-bold mb-6">Want to Work With Us?</h2>
               <p className="text-xl text-muted-foreground mb-8">
-                We're always excited to take on new challenges and build amazing things together.
+                We're always excited to take on new challenges and build amazing
+                things together.
               </p>
               <Link to="/contact">
                 <Button size="lg">Get in Touch</Button>
