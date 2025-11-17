@@ -14,7 +14,100 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      blogs: {
+        Row: {
+          id: string
+          title: string
+          slug: string
+          excerpt: string | null
+          content: string
+          category: string
+          author: string
+          image: string | null
+          tags: string[]
+          published: boolean
+          read_time: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          title: string
+          slug: string
+          excerpt?: string | null
+          content: string
+          category?: string
+          author: string
+          image?: string | null
+          tags?: string[]
+          published?: boolean
+          read_time?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          title?: string
+          slug?: string
+          excerpt?: string | null
+          content?: string
+          category?: string
+          author?: string
+          image?: string | null
+          tags?: string[]
+          published?: boolean
+          read_time?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      projects: {
+        Row: {
+          id: string
+          title: string
+          slug: string
+          tagline: string | null
+          description: string
+          category: string
+          image: string | null
+          technologies: string[]
+          demo_url: string | null
+          github_url: string | null
+          featured: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          title: string
+          slug: string
+          tagline?: string | null
+          description: string
+          category?: string
+          image?: string | null
+          technologies?: string[]
+          demo_url?: string | null
+          github_url?: string | null
+          featured?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          title?: string
+          slug?: string
+          tagline?: string | null
+          description?: string
+          category?: string
+          image?: string | null
+          technologies?: string[]
+          demo_url?: string | null
+          github_url?: string | null
+          featured?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+      }
     }
     Views: {
       [_ in never]: never

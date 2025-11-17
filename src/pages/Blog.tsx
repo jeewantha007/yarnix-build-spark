@@ -3,85 +3,35 @@ import Footer from "@/components/layout/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Calendar, Clock } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { getPublishedBlogs } from "@/lib/supabase/queries/blogs";
 
 const Blog = () => {
-  const posts = [
-    {
-      id: 1,
-      title: "The Future of AI in Business Automation",
-      slug: "future-ai-business-automation",
-      excerpt: "Explore how artificial intelligence is transforming business processes and what it means for the future of work.",
-      category: "AI",
-      author: "Sarah Chen",
-      date: "2024-01-15",
-      readTime: "8 min read",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
-      featured: true,
-    },
-    {
-      id: 2,
-      title: "Building Scalable Web Apps with React and Supabase",
-      slug: "scalable-apps-react-supabase",
-      excerpt: "A deep dive into creating production-ready applications using modern web technologies.",
-      category: "Development",
-      author: "Marcus Rodriguez",
-      date: "2024-01-10",
-      readTime: "12 min read",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
-      featured: false,
-    },
-    {
-      id: 3,
-      title: "10 Ways AI Can Reduce Operational Costs",
-      slug: "ai-reduce-operational-costs",
-      excerpt: "Practical strategies for implementing AI to streamline operations and save money.",
-      category: "Business",
-      author: "Alex Thompson",
-      date: "2024-01-05",
-      readTime: "6 min read",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-      featured: false,
-    },
-    {
-      id: 4,
-      title: "Mobile-First Design Principles for 2024",
-      slug: "mobile-first-design-2024",
-      excerpt: "Essential design patterns and best practices for creating exceptional mobile experiences.",
-      category: "Design",
-      author: "Marcus Rodriguez",
-      date: "2024-01-01",
-      readTime: "10 min read",
-      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80",
-      featured: false,
-    },
-    {
-      id: 5,
-      title: "Understanding Large Language Models",
-      slug: "understanding-llms",
-      excerpt: "A comprehensive guide to how GPT and similar models work under the hood.",
-      category: "AI",
-      author: "Sarah Chen",
-      date: "2023-12-28",
-      readTime: "15 min read",
-      image: "https://images.unsplash.com/photo-1655635949384-f737c5133dfe?w=800&q=80",
-      featured: false,
-    },
-    {
-      id: 6,
-      title: "Automating Customer Support with Chatbots",
-      slug: "automating-customer-support",
-      excerpt: "Case study: How we reduced support tickets by 60% using intelligent chatbots.",
-      category: "Automation",
-      author: "Alex Thompson",
-      date: "2023-12-20",
-      readTime: "7 min read",
-      image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&q=80",
-      featured: false,
-    },
-  ];
+  const { data: posts = [], isLoading } = useQuery({
+    queryKey: ["published-blogs"],
+    queryFn: getPublishedBlogs,
+  });
 
-  const featuredPost = posts.find(p => p.featured);
-  const regularPosts = posts.filter(p => !p.featured);
+  // Find featured post (you can add a featured field to blogs table if needed)
+  // For now, we'll use the first post as featured
+  const featuredPost = posts[0];
+  const regularPosts = posts.slice(1);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen">
+        <Navbar />
+        <main className="pt-20">
+          <div className="container mx-auto px-4 py-20">
+            <div className="flex items-center justify-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">
@@ -108,12 +58,20 @@ const Blog = () => {
               <Link to={`/blog/${featuredPost.slug}`}>
                 <div className="max-w-5xl mx-auto bg-card border border-border rounded-lg overflow-hidden hover:shadow-elegant transition-all duration-300 group">
                   <div className="grid md:grid-cols-2 gap-8">
-                    <div className="aspect-video md:aspect-auto overflow-hidden">
-                      <img
-                        src={featuredPost.image}
-                        alt={featuredPost.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
+                    <div className="aspect-video md:aspect-auto overflow-hidden bg-gradient-to-br from-primary/20 to-secondary/20">
+                      {featuredPost.image ? (
+                        <img
+                          src={featuredPost.image}
+                          alt={featuredPost.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <span className="text-6xl font-bold text-primary/30">
+                            {featuredPost.title.charAt(0)}
+                          </span>
+                        </div>
+                      )}
                     </div>
                     <div className="p-8 flex flex-col justify-center">
                       <Badge className="w-fit mb-4">Featured</Badge>
@@ -127,11 +85,11 @@ const Blog = () => {
                         <span>{featuredPost.author}</span>
                         <span className="flex items-center gap-1">
                           <Calendar className="w-4 h-4" />
-                          {new Date(featuredPost.date).toLocaleDateString()}
+                          {new Date(featuredPost.created_at).toLocaleDateString()}
                         </span>
                         <span className="flex items-center gap-1">
                           <Clock className="w-4 h-4" />
-                          {featuredPost.readTime}
+                          {featuredPost.read_time || "5 min read"}
                         </span>
                       </div>
                     </div>
@@ -154,12 +112,20 @@ const Blog = () => {
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <article className="bg-card border border-border rounded-lg overflow-hidden hover:shadow-elegant transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
-                    <div className="aspect-video overflow-hidden">
-                      <img
-                        src={post.image}
-                        alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
+                    <div className="aspect-video overflow-hidden bg-gradient-to-br from-primary/20 to-secondary/20">
+                      {post.image ? (
+                        <img
+                          src={post.image}
+                          alt={post.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <span className="text-4xl font-bold text-primary/30">
+                            {post.title.charAt(0)}
+                          </span>
+                        </div>
+                      )}
                     </div>
                     <div className="p-6 flex-1 flex flex-col">
                       <Badge variant="secondary" className="w-fit mb-3">
@@ -175,7 +141,7 @@ const Blog = () => {
                         <span>{post.author}</span>
                         <span className="flex items-center gap-1">
                           <Clock className="w-4 h-4" />
-                          {post.readTime}
+                          {post.read_time || "5 min read"}
                         </span>
                       </div>
                     </div>
