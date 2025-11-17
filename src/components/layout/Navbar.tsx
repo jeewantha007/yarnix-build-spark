@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import DarkModeToggle from "@/components/DarkModeToggle";
+import logo from "@/components/yarnix-logo.jpg";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,9 +37,11 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 group">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center transition-transform group-hover:scale-110">
-              <span className="text-primary-foreground font-bold text-lg">Y</span>
-            </div>
+            <img
+              src={logo}
+              alt="Yarnix Labs Logo"
+              className="h-8 w-8 md:h-10 md:w-10 rounded-full object-cover group-hover:scale-105 transition-transform"
+            />
             <span className="font-bold text-xl">Yarnix Labs</span>
           </Link>
 
