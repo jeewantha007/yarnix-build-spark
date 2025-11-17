@@ -58,11 +58,16 @@ const Hero = () => {
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-secondary/10 rounded-full blur-[120px] animate-pulse-slow z-[1]" style={{ animationDelay: "1s" }}></div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-5xl mx-auto text-center">
-         
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Badge with shimmer effect */}
+          <div className="inline-flex items-center space-x-2 bg-accent/80 backdrop-blur-sm px-5 py-2 rounded-full mb-6 animate-fade-in border border-primary/20 relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+            <Sparkles size={14} className="text-primary animate-pulse" />
+            <span className="text-xs font-medium text-accent-foreground">AI-Powered Solutions</span>
+          </div>
 
-          {/* Headline with stagger animation */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
+          {/* Headline with stagger animation - More readable sizes */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-5 leading-tight">
             <span className="inline-block animate-slide-up opacity-0" style={{ animationDelay: "0.1s", animationFillMode: "forwards" }}>
               We Build{" "}
             </span>
@@ -74,48 +79,48 @@ const Hero = () => {
             </span>
           </h1>
 
-          {/* Subheadline */}
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-fade-in opacity-0" style={{ animationDelay: "0.5s", animationFillMode: "forwards" }}>
+          {/* Subheadline - Reduced size */}
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto animate-fade-in opacity-0 leading-relaxed" style={{ animationDelay: "0.5s", animationFillMode: "forwards" }}>
             Transform your business with custom AI tools, automation solutions, and cutting-edge web & mobile applications.
           </p>
 
           {/* CTAs with enhanced hover effects */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in opacity-0" style={{ animationDelay: "0.7s", animationFillMode: "forwards" }}>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in opacity-0 mb-16" style={{ animationDelay: "0.7s", animationFillMode: "forwards" }}>
             <Link to="/contact">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-elegant group px-8 h-14 text-lg relative overflow-hidden">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-elegant group px-7 h-12 text-base relative overflow-hidden">
                 <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
                 <span className="relative flex items-center">
                   Start a Project
-                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+                  <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
                 </span>
               </Button>
             </Link>
             <Link to="/projects">
-              <Button size="lg" variant="outline" className="border-2 border-primary/50 text-primary hover:bg-primary/10 hover:border-primary h-14 px-8 text-lg backdrop-blur-sm transition-all duration-300 hover:shadow-[0_0_20px_rgba(var(--primary),0.3)]">
+              <Button size="lg" variant="outline" className="border-2 border-primary/50 text-primary hover:bg-primary/10 hover:border-primary h-12 px-7 text-base backdrop-blur-sm transition-all duration-300 hover:shadow-[0_0_20px_rgba(var(--primary),0.3)]">
                 View Our Work
               </Button>
             </Link>
           </div>
 
-          {/* Stats with counter animation */}
-          <div className="grid grid-cols-3 gap-8 mt-20 max-w-2xl mx-auto animate-fade-in opacity-0" style={{ animationDelay: "0.9s", animationFillMode: "forwards" }}>
+          {/* Stats with counter animation - Smaller, cleaner */}
+          <div className="grid grid-cols-3 gap-6 md:gap-8 max-w-xl mx-auto animate-fade-in opacity-0" style={{ animationDelay: "0.9s", animationFillMode: "forwards" }}>
             <div className="group cursor-default">
-              <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-1 group-hover:scale-110 transition-transform duration-300">
                 50+
               </div>
-              <div className="text-sm text-muted-foreground">Projects Delivered</div>
+              <div className="text-xs md:text-sm text-muted-foreground">Projects Delivered</div>
             </div>
             <div className="group cursor-default">
-              <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-1 group-hover:scale-110 transition-transform duration-300">
                 3
               </div>
-              <div className="text-sm text-muted-foreground">Expert Team Members</div>
+              <div className="text-xs md:text-sm text-muted-foreground">Expert Team</div>
             </div>
             <div className="group cursor-default">
-              <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-1 group-hover:scale-110 transition-transform duration-300">
                 100%
               </div>
-              <div className="text-sm text-muted-foreground">Client Satisfaction</div>
+              <div className="text-xs md:text-sm text-muted-foreground">Client Satisfaction</div>
             </div>
           </div>
         </div>
