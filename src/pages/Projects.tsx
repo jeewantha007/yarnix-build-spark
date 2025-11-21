@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Projects = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: "ease-out-cubic",
+    });
+  }, []);
+
   const [activeFilter, setActiveFilter] = useState("All");
 
   const categories = ["All", "AI Tools", "Automation", "Web Apps", "Mobile Apps"];
@@ -79,10 +89,17 @@ const Projects = () => {
         <section className="py-20 bg-gradient-to-b from-accent/20 to-background">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-5xl md:text-6xl font-bold mb-6">
+              <h1 
+                className="text-4xl md:text-5xl font-bold mb-6"
+                data-aos="fade-up"
+              >
                 Our <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Projects</span>
               </h1>
-              <p className="text-xl text-muted-foreground">
+              <p 
+                className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
+                data-aos="fade-up"
+                data-aos-delay="100"
+              >
                 Explore our portfolio of AI-powered solutions that drive real business results.
               </p>
             </div>
@@ -92,13 +109,18 @@ const Projects = () => {
         {/* Filter Bar */}
         <section className="py-8 border-b border-border">
           <div className="container mx-auto px-4">
-            <div className="flex flex-wrap gap-3 justify-center">
+            <div 
+              className="flex flex-wrap gap-3 justify-center"
+              data-aos="fade-up"
+            >
               {categories.map((category) => (
                 <Button
                   key={category}
                   variant={activeFilter === category ? "default" : "outline"}
                   onClick={() => setActiveFilter(category)}
                   className="rounded-full"
+                  data-aos="fade-up"
+                  data-aos-delay={categories.indexOf(category) * 50}
                 >
                   {category}
                 </Button>
@@ -115,8 +137,9 @@ const Projects = () => {
                 <Link
                   key={project.id}
                   to={`/projects/${project.slug}`}
-                  className="group animate-fade-in"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  className="group"
+                  data-aos="fade-up"
+                  data-aos-delay={index * 100}
                 >
                   <div className="bg-card border border-border rounded-lg overflow-hidden hover:shadow-elegant transition-all duration-300 hover:-translate-y-1">
                     <div className="aspect-video overflow-hidden">
@@ -130,17 +153,27 @@ const Projects = () => {
                       <Badge variant="secondary" className="mb-3">
                         {project.category}
                       </Badge>
-                      <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+                      <h3 
+                        className="text-xl font-bold mb-2 group-hover:text-primary transition-colors"
+                        data-aos="fade-up"
+                        data-aos-delay={index * 100 + 50}
+                      >
                         {project.title}
                       </h3>
-                      <p className="text-muted-foreground mb-4">
+                      <p 
+                        className="text-muted-foreground mb-4"
+                        data-aos="fade-up"
+                        data-aos-delay={index * 100 + 100}
+                      >
                         {project.tagline}
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        {project.tags.map((tag) => (
+                        {project.tags.map((tag, tagIndex) => (
                           <span
                             key={tag}
                             className="tech-badge"
+                            data-aos="fade-up"
+                            data-aos-delay={index * 100 + 150 + tagIndex * 30}
                           >
                             {tag}
                           </span>

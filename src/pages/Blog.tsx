@@ -3,8 +3,19 @@ import Footer from "@/components/layout/Footer";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Calendar, Clock } from "lucide-react";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Blog = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: "ease-out-cubic",
+    });
+  }, []);
+
   const posts = [
     {
       id: 1,
@@ -91,10 +102,17 @@ const Blog = () => {
         <section className="py-20 bg-gradient-to-b from-accent/20 to-background">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-5xl md:text-6xl font-bold mb-6">
+              <h1 
+                className="text-4xl md:text-5xl font-bold mb-6"
+                data-aos="fade-up"
+              >
                 Our <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Blog</span>
               </h1>
-              <p className="text-xl text-muted-foreground">
+              <p 
+                className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
+                data-aos="fade-up"
+                data-aos-delay="100"
+              >
                 Insights on AI, automation, and software development from our team.
               </p>
             </div>
@@ -106,7 +124,10 @@ const Blog = () => {
           <section className="py-12">
             <div className="container mx-auto px-4">
               <Link to={`/blog/${featuredPost.slug}`}>
-                <div className="max-w-5xl mx-auto bg-card border border-border rounded-lg overflow-hidden hover:shadow-elegant transition-all duration-300 group">
+                <div 
+                  className="max-w-5xl mx-auto bg-card border border-border rounded-lg overflow-hidden hover:shadow-elegant transition-all duration-300 group"
+                  data-aos="fade-up"
+                >
                   <div className="grid md:grid-cols-2 gap-8">
                     <div className="aspect-video md:aspect-auto overflow-hidden">
                       <img
@@ -117,13 +138,25 @@ const Blog = () => {
                     </div>
                     <div className="p-8 flex flex-col justify-center">
                       <Badge className="w-fit mb-4">Featured</Badge>
-                      <h2 className="text-3xl font-bold mb-4 group-hover:text-primary transition-colors">
+                      <h2 
+                        className="text-2xl md:text-3xl font-bold mb-4 group-hover:text-primary transition-colors"
+                        data-aos="fade-up"
+                        data-aos-delay="100"
+                      >
                         {featuredPost.title}
                       </h2>
-                      <p className="text-muted-foreground mb-6">
+                      <p 
+                        className="text-muted-foreground mb-6"
+                        data-aos="fade-up"
+                        data-aos-delay="200"
+                      >
                         {featuredPost.excerpt}
                       </p>
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                      <div 
+                        className="flex items-center gap-4 text-sm text-muted-foreground"
+                        data-aos="fade-up"
+                        data-aos-delay="300"
+                      >
                         <span>{featuredPost.author}</span>
                         <span className="flex items-center gap-1">
                           <Calendar className="w-4 h-4" />
@@ -150,8 +183,9 @@ const Blog = () => {
                 <Link
                   key={post.id}
                   to={`/blog/${post.slug}`}
-                  className="group animate-fade-in"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  className="group"
+                  data-aos="fade-up"
+                  data-aos-delay={index * 100}
                 >
                   <article className="bg-card border border-border rounded-lg overflow-hidden hover:shadow-elegant transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
                     <div className="aspect-video overflow-hidden">
@@ -165,13 +199,25 @@ const Blog = () => {
                       <Badge variant="secondary" className="w-fit mb-3">
                         {post.category}
                       </Badge>
-                      <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
+                      <h3 
+                        className="text-xl font-bold mb-3 group-hover:text-primary transition-colors"
+                        data-aos="fade-up"
+                        data-aos-delay={index * 100 + 50}
+                      >
                         {post.title}
                       </h3>
-                      <p className="text-muted-foreground mb-4 flex-1">
+                      <p 
+                        className="text-muted-foreground mb-4 flex-1"
+                        data-aos="fade-up"
+                        data-aos-delay={index * 100 + 100}
+                      >
                         {post.excerpt}
                       </p>
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground pt-4 border-t border-border">
+                      <div 
+                        className="flex items-center gap-4 text-sm text-muted-foreground pt-4 border-t border-border"
+                        data-aos="fade-up"
+                        data-aos-delay={index * 100 + 150}
+                      >
                         <span>{post.author}</span>
                         <span className="flex items-center gap-1">
                           <Clock className="w-4 h-4" />
