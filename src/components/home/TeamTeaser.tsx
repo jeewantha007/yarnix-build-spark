@@ -3,83 +3,99 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, ArrowRight } from "lucide-react";
 import jeewantha from "../../assets/jeewantha.jpg";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const TeamTeaser = () => {
   // Mock data - will be replaced with Supabase data later
   const team = [
     {
       name: "Nirmal Wishwantha",
-      role: "CEO & Lead Developer",
-      bio: "Full-stack developer with 10+ years building scalable AI solutions",
-      image: "/placeholder.svg",
+      role: "Co-Founder & Technical Lead",
+      bio: "Innovative full-stack developer and technology strategist, experienced in designing and delivering modern digital products. Skilled at solving complex technical challenges and leading high-performing development teams.",
+      photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80",
       github: "https://github.com",
       linkedin: "https://linkedin.com",
     },
     {
       name: "Jeewantha Sandeepa",
-      role: "AI/ML Engineer",
-      bio: "Machine learning expert specializing in NLP and computer vision",
-      image: jeewantha,
+      role: "Co-Founder & DevOps Engineer",
+      bio: "Experienced DevOps engineer and cloud specialist, adept at building scalable, automated, and reliable systems. Passionate about streamlining development workflows and delivering impactful software solutions.",
+      photo: jeewantha,
       github: "https://github.com",
       linkedin: "https://linkedin.com",
     },
     {
       name: "Yasith Nawanjana",
-      role: "DevOps & Automation Lead",
-      bio: "Infrastructure architect passionate about automation and cloud systems",
-      image: "/placeholder.svg",
+      role: "Co-Founder & AI/ML Engineer",
+      bio: "Creative AI and machine learning engineer with expertise in automation, mobile app development, and end-to-end product delivery. Driven by innovation and committed to solving real-world challenges with intelligent solutions.",
+      photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80",
       github: "https://github.com",
       linkedin: "https://linkedin.com",
     },
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-muted/30">
+    <section className="py-16 md:py-20 bg-muted/30">
       <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Meet Our Team
+        <div className="max-w-3xl mx-auto text-center mb-12">
+          <h2 
+            className="text-3xl md:text-4xl font-bold mb-3"
+            data-aos="fade-up"
+          >
+            Meet the Team
           </h2>
-          <p className="text-xl text-muted-foreground">
-            Experienced professionals dedicated to building exceptional software
+          <p 
+            className="text-base text-muted-foreground"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            The talented people behind Yarnix Labs
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-12">
           {team.map((member, index) => (
             <Card
               key={index}
-              className="border-none shadow-card hover:shadow-card-hover transition-all duration-300 group hover:-translate-y-2 animate-fade-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="border-none shadow-card hover:shadow-card-hover transition-all duration-500 group hover:-translate-y-2 bg-background overflow-hidden"
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
             >
-              <CardContent className="p-6 text-center">
-                <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary to-secondary overflow-hidden">
-                  <div className="w-full h-full bg-muted flex items-center justify-center text-4xl font-bold text-muted-foreground">
-                    {member.name.split(' ').map(n => n[0]).join('')}
-                  </div>
-                </div>
-                <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
-                <div className="text-primary font-medium mb-3 text-sm">{member.role}</div>
-                <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+              <div className="aspect-square overflow-hidden relative">
+                <img
+                  src={member.photo}
+                  alt={member.name}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+              <CardContent className="p-5">
+                <h3 className="text-lg font-bold mb-1">{member.name}</h3>
+                <p className="text-primary font-medium text-sm mb-3">
+                  {member.role}
+                </p>
+                <p className="text-xs text-muted-foreground mb-4 leading-relaxed">
                   {member.bio}
                 </p>
-                <div className="flex justify-center space-x-3">
+                <div className="flex gap-2">
                   <a
                     href={member.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-9 h-9 rounded-lg bg-background border border-border flex items-center justify-center hover:bg-accent transition-colors"
+                    className="w-9 h-9 bg-accent rounded-xl flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110"
                     aria-label="GitHub"
                   >
-                    <Github size={16} />
+                    <Github className="w-4 h-4" />
                   </a>
                   <a
                     href={member.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-9 h-9 rounded-lg bg-background border border-border flex items-center justify-center hover:bg-accent transition-colors"
+                    className="w-9 h-9 bg-accent rounded-xl flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110"
                     aria-label="LinkedIn"
                   >
-                    <Linkedin size={16} />
+                    <Linkedin className="w-4 h-4" />
                   </a>
                 </div>
               </CardContent>
@@ -87,7 +103,7 @@ const TeamTeaser = () => {
           ))}
         </div>
 
-        <div className="text-center">
+        <div className="text-center" data-aos="fade-up">
           <Link to="/about">
             <Button variant="outline" className="border-2 border-primary text-primary hover:bg-accent group">
               Learn More About Us

@@ -1,6 +1,8 @@
 import { Brain, Zap, Code, Puzzle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Features = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -37,7 +39,7 @@ const Features = () => {
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-muted/30 relative overflow-hidden">
+    <section className="py-16 md:py-20 bg-muted/30 relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-pulse-slow"></div>
@@ -48,20 +50,31 @@ const Features = () => {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:40px_40px]"></div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl mx-auto text-center mb-16">
+        <div className="max-w-3xl mx-auto text-center mb-12">
           {/* Section Badge */}
-          <div className="inline-flex items-center space-x-2 bg-primary/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6 animate-fade-in border border-primary/20">
+          <div 
+            className="inline-flex items-center space-x-2 bg-accent/80 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-primary/20"
+            data-aos="fade-up"
+          >
             <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-            <span className="text-sm font-medium text-primary">Our Services</span>
+            <span className="text-sm font-medium text-accent-foreground">Our Services</span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-slide-up">
+          <h2 
+            className="text-3xl md:text-4xl font-bold mb-5"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
             What We Do{" "}
             <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
               Best
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground animate-fade-in" style={{ animationDelay: "0.2s" }}>
+          <p 
+            className="text-lg text-muted-foreground max-w-2xl mx-auto"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
             Comprehensive software solutions tailored to your business needs
           </p>
         </div>
@@ -70,8 +83,9 @@ const Features = () => {
           {features.map((feature, index) => (
             <Card
               key={index}
-              className="border-none shadow-card hover:shadow-card-hover transition-all duration-500 group hover:-translate-y-2 animate-fade-in bg-background/80 backdrop-blur-sm relative overflow-hidden cursor-pointer"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="border-none shadow-card hover:shadow-card-hover transition-all duration-500 group hover:-translate-y-2 bg-background/80 backdrop-blur-sm relative overflow-hidden cursor-pointer"
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
@@ -100,7 +114,7 @@ const Features = () => {
               )}
 
               {/* Shimmer effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500">
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
               </div>
 
@@ -114,10 +128,18 @@ const Features = () => {
                   <div className={`absolute inset-0 w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.gradient} blur-md opacity-0 group-hover:opacity-50 transition-opacity duration-500`}></div>
                 </div>
 
-                <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors duration-300">
+                <h3 
+                  className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors duration-300"
+                  data-aos="fade-up"
+                  data-aos-delay={index * 100 + 50}
+                >
                   {feature.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p 
+                  className="text-muted-foreground leading-relaxed text-sm"
+                  data-aos="fade-up"
+                  data-aos-delay={index * 100 + 100}
+                >
                   {feature.description}
                 </p>
 
@@ -142,28 +164,6 @@ const Features = () => {
           50% {
             opacity: 0.5;
             transform: scale(1.05);
-          }
-        }
-
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes slide-up {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
           }
         }
 
@@ -195,14 +195,6 @@ const Features = () => {
 
         .animate-pulse-slow {
           animation: pulse-slow 4s ease-in-out infinite;
-        }
-
-        .animate-fade-in {
-          animation: fade-in 0.8s ease-out forwards;
-        }
-
-        .animate-slide-up {
-          animation: slide-up 0.8s ease-out forwards;
         }
 
         .animate-particle {
