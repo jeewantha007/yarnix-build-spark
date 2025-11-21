@@ -87,8 +87,8 @@ const Projects = () => {
     <div className="min-h-screen">
       <Navbar />
       <main>
-        {/* Hero Section - Full Screen with Image Background */}
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
+        {/* Hero Section - Reduced Height with Image Background */}
+        <section className="relative h-[70vh] flex items-center justify-center overflow-hidden bg-black">
           {/* Image Background */}
           <div className="absolute inset-0 z-0">
             <img
