@@ -4,12 +4,18 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Calendar, Clock, Sparkles, ArrowRight } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import blogImage from "../assets/blogs.jpg";
+import { fetchBlogPosts } from "@/services/api";
+import type { BlogPost } from "@/services/api";
 
 const Blog = () => {
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -18,83 +24,55 @@ const Blog = () => {
     });
   }, []);
 
-  const posts = [
-    {
-      id: 1,
-      title: "The Future of AI in Business Automation",
-      slug: "future-ai-business-automation",
-      excerpt: "Explore how artificial intelligence is transforming business processes and what it means for the future of work.",
-      category: "AI",
-      author: "Sarah Chen",
-      date: "2024-01-15",
-      readTime: "8 min read",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
-      featured: true,
-    },
-    {
-      id: 2,
-      title: "Building Scalable Web Apps with React and Supabase",
-      slug: "scalable-apps-react-supabase",
-      excerpt: "A deep dive into creating production-ready applications using modern web technologies.",
-      category: "Development",
-      author: "Marcus Rodriguez",
-      date: "2024-01-10",
-      readTime: "12 min read",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
-      featured: false,
-    },
-    {
-      id: 3,
-      title: "10 Ways AI Can Reduce Operational Costs",
-      slug: "ai-reduce-operational-costs",
-      excerpt: "Practical strategies for implementing AI to streamline operations and save money.",
-      category: "Business",
-      author: "Alex Thompson",
-      date: "2024-01-05",
-      readTime: "6 min read",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-      featured: false,
-    },
-    {
-      id: 4,
-      title: "Mobile-First Design Principles for 2024",
-      slug: "mobile-first-design-2024",
-      excerpt: "Essential design patterns and best practices for creating exceptional mobile experiences.",
-      category: "Design",
-      author: "Marcus Rodriguez",
-      date: "2024-01-01",
-      readTime: "10 min read",
-      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80",
-      featured: false,
-    },
-    {
-      id: 5,
-      title: "Understanding Large Language Models",
-      slug: "understanding-llms",
-      excerpt: "A comprehensive guide to how GPT and similar models work under the hood.",
-      category: "AI",
-      author: "Sarah Chen",
-      date: "2023-12-28",
-      readTime: "15 min read",
-      image: "https://images.unsplash.com/photo-1655635949384-f737c5133dfe?w=800&q=80",
-      featured: false,
-    },
-    {
-      id: 6,
-      title: "Automating Customer Support with Chatbots",
-      slug: "automating-customer-support",
-      excerpt: "Case study: How we reduced support tickets by 60% using intelligent chatbots.",
-      category: "Automation",
-      author: "Alex Thompson",
-      date: "2023-12-20",
-      readTime: "7 min read",
-      image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&q=80",
-      featured: false,
-    },
-  ];
+  useEffect(() => {
+    const loadBlogPosts = async () => {
+      try {
+        setLoading(true);
+        const blogPosts = await fetchBlogPosts();
+        setPosts(blogPosts);
+      } catch (err) {
+        setError("Failed to load blog posts");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadBlogPosts();
+  }, []);
 
   const featuredPost = posts.find(p => p.featured);
   const regularPosts = posts.filter(p => !p.featured);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen">
+        <Navbar />
+        <main className="flex items-center justify-center h-screen">
+          <div className="text-center">
+            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
+            <p className="mt-4">Loading blog posts...</p>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen">
+        <Navbar />
+        <main className="flex items-center justify-center h-screen">
+          <div className="text-center">
+            <p className="text-red-500">{error}</p>
+            <Button onClick={() => window.location.reload()} className="mt-4">
+              Retry
+            </Button>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">
@@ -243,11 +221,11 @@ const Blog = () => {
                         <span>{featuredPost.author}</span>
                         <span className="flex items-center gap-1">
                           <Calendar className="w-4 h-4" />
-                          {new Date(featuredPost.date).toLocaleDateString()}
+                          {new Date(featuredPost.created_at).toLocaleDateString()}
                         </span>
                         <span className="flex items-center gap-1">
                           <Clock className="w-4 h-4" />
-                          {featuredPost.readTime}
+                          {featuredPost.read_time}
                         </span>
                       </div>
                     </div>
@@ -292,7 +270,7 @@ const Blog = () => {
                         <span>{post.author}</span>
                         <span className="flex items-center gap-1">
                           <Clock className="w-4 h-4" />
-                          {post.readTime}
+                          {post.read_time}
                         </span>
                       </div>
                     </div>

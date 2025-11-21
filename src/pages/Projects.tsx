@@ -8,8 +8,15 @@ import { Sparkles, ArrowRight } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import projectsImage from "../assets/projects.jpg";
+import { fetchProjects } from "@/services/api";
+import type { Project } from "@/services/api";
 
 const Projects = () => {
+  const [activeFilter, setActiveFilter] = useState("All");
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -18,70 +25,58 @@ const Projects = () => {
     });
   }, []);
 
-  const [activeFilter, setActiveFilter] = useState("All");
+  useEffect(() => {
+    const loadProjects = async () => {
+      try {
+        setLoading(true);
+        const projectData = await fetchProjects();
+        setProjects(projectData);
+      } catch (err) {
+        setError("Failed to load projects");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const categories = ["All", "AI Tools", "Automation", "Web Apps", "Mobile Apps"];
+    loadProjects();
+  }, []);
 
-  const projects = [
-    {
-      id: 1,
-      title: "AI Customer Support Bot",
-      slug: "ai-customer-support-bot",
-      category: "AI Tools",
-      image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&q=80",
-      tagline: "Intelligent chatbot reducing support tickets by 60%",
-      tags: ["GPT-4", "React", "Node.js"],
-    },
-    {
-      id: 2,
-      title: "Inventory Automation System",
-      slug: "inventory-automation",
-      category: "Automation",
-      image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&q=80",
-      tagline: "Smart warehouse management with predictive restocking",
-      tags: ["Python", "TensorFlow", "PostgreSQL"],
-    },
-    {
-      id: 3,
-      title: "E-Commerce Platform",
-      slug: "ecommerce-platform",
-      category: "Web Apps",
-      image: "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&q=80",
-      tagline: "Scalable online store with AI recommendations",
-      tags: ["Next.js", "Stripe", "Tailwind"],
-    },
-    {
-      id: 4,
-      title: "Fitness Tracker App",
-      slug: "fitness-tracker",
-      category: "Mobile Apps",
-      image: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&q=80",
-      tagline: "AI-powered workout and nutrition planning",
-      tags: ["React Native", "Firebase", "ML Kit"],
-    },
-    {
-      id: 5,
-      title: "Document Processing Pipeline",
-      slug: "document-processing",
-      category: "Automation",
-      image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80",
-      tagline: "OCR and NLP for automated data extraction",
-      tags: ["Python", "Tesseract", "spaCy"],
-    },
-    {
-      id: 6,
-      title: "Real Estate Portal",
-      slug: "real-estate-portal",
-      category: "Web Apps",
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80",
-      tagline: "Property listings with virtual tours and AI matching",
-      tags: ["React", "Supabase", "Three.js"],
-    },
-  ];
+  const categories = ["All", ...Array.from(new Set(projects.map(p => p.category)))];
 
   const filteredProjects = activeFilter === "All" 
     ? projects 
     : projects.filter(p => p.category === activeFilter);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen">
+        <Navbar />
+        <main className="flex items-center justify-center h-screen">
+          <div className="text-center">
+            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
+            <p className="mt-4">Loading projects...</p>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen">
+        <Navbar />
+        <main className="flex items-center justify-center h-screen">
+          <div className="text-center">
+            <p className="text-red-500">{error}</p>
+            <Button onClick={() => window.location.reload()} className="mt-4">
+              Retry
+            </Button>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">
@@ -255,7 +250,7 @@ const Projects = () => {
                         {project.tagline}
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        {project.tags.map((tag, tagIndex) => (
+                        {project.technologies.map((tag, tagIndex) => (
                           <span
                             key={tag}
                             className="tech-badge"

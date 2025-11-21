@@ -14,6 +14,9 @@ import Services from "./pages/Services";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
 import NotFound from "./pages/NotFound";
+import Contact from "./pages/Contact";
+import BlogPostDetail from "./pages/BlogPostDetail";
+import ProjectDetail from "./pages/ProjectDetail";
 
 // Admin Pages
 import Login from "./pages/admin/Login";
@@ -36,9 +39,12 @@ const App = () => (
             {/* Public Routes */}
             <Route path="/" element={<Index />} />
             <Route path="/projects" element={<Projects />} />
+            <Route path="/projects/:slug" element={<ProjectDetail />} />
             <Route path="/services" element={<Services />} />
             <Route path="/about" element={<About />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPostDetail />} />
+            <Route path="/contact" element={<Contact />} />
 
             {/* Admin Login (public) */}
             <Route path="/admin/login" element={<Login />} />
